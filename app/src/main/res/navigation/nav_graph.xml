@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/pickUserFragment">
+
+    <fragment
+        android:id="@+id/pickUserFragment"
+        android:name="com.prizma_distribucija.prizmaadmin.feature_verify_route.presentation.pick_user.PickUserFragment"
+        android:label="fragment_pick_user"
+        tools:layout="@layout/fragment_pick_user" />
+</navigation>
