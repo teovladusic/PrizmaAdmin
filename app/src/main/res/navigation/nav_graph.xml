@@ -3,11 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/pickUserFragment">
+    app:startDestination="@id/pickEmployeeFragment">
 
     <fragment
-        android:id="@+id/pickUserFragment"
-        android:name="com.prizma_distribucija.prizmaadmin.feature_verify_route.presentation.pick_user.PickUserFragment"
-        android:label="fragment_pick_user"
-        tools:layout="@layout/fragment_pick_user" />
+        android:id="@+id/pickEmployeeFragment"
+        android:name="com.prizma_distribucija.prizmaadmin.feature_verify_route.presentation.pick_employee.PickEmployeeFragment"
+        android:label="fragment_pick_employee"
+        tools:layout="@layout/fragment_pick_employee">
+        <action
+            android:id="@+id/action_pickEmployeeFragment_to_pickMonthFragment"
+            app:destination="@id/pickMonthFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pickMonthFragment"
+        android:name="com.prizma_distribucija.prizmaadmin.feature_verify_route.presentation.pick_month.PickMonthFragment"
+        android:label="fragment_pick_month"
+        tools:layout="@layout/fragment_pick_month">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_pickMonthFragment_to_pickRouteFragment"
+            app:destination="@id/pickRouteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pickRouteFragment"
+        android:name="com.prizma_distribucija.prizmaadmin.feature_verify_route.presentation.pick_route.PickRouteFragment"
+        android:label="fragment_pick_route"
+        tools:layout="@layout/fragment_pick_route">
+        <argument
+            android:name="employeeWithUnseenRoutes"
+            app:argType="com.prizma_distribucija.prizmaadmin.feature_verify_route.domain.model.EmployeeWithUnseenRoutes" />
+        <argument
+            android:name="month"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_pickRouteFragment_to_checkRouteFragment"
+            app:destination="@id/checkRouteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkRouteFragment"
+        android:name="com.prizma_distribucija.prizmaadmin.feature_verify_route.presentation.check_route.CheckRouteFragment"
+        android:label="fragment_check_route"
+        tools:layout="@layout/fragment_check_route" >
+        <argument
+            android:name="employee"
+            app:argType="com.prizma_distribucija.prizmaadmin.feature_verify_route.domain.model.Employee" />
+        <argument
+            android:name="route"
+            app:argType="com.prizma_distribucija.prizmaadmin.feature_verify_route.domain.model.Route" />
+    </fragment>
 </navigation>
