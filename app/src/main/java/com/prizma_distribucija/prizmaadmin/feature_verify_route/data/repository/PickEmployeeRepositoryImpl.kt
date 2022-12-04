@@ -1,6 +1,9 @@
 package com.prizma_distribucija.prizmaadmin.feature_verify_route.data.repository
 
+import com.google.android.gms.maps.model.LatLng
 import com.prizma_distribucija.prizmaadmin.core.domain.FirebaseService
+import com.prizma_distribucija.prizmaadmin.feature_verify_route.data.remote.dto.PathPointDto
+import com.prizma_distribucija.prizmaadmin.feature_verify_route.data.remote.dto.RouteDto
 import com.prizma_distribucija.prizmaadmin.feature_verify_route.domain.PickEmployeeRepository
 import com.prizma_distribucija.prizmaadmin.feature_verify_route.domain.model.*
 import kotlinx.coroutines.*
@@ -8,7 +11,6 @@ import javax.inject.Inject
 
 class PickEmployeeRepositoryImpl @Inject constructor(
     private val firebaseService: FirebaseService,
-    private val routeMapper: RouteMapper,
     private val employeeMapper: EmployeeMapper
 ) : PickEmployeeRepository {
 
@@ -21,7 +23,7 @@ class PickEmployeeRepositoryImpl @Inject constructor(
             val employees = employeesDto.map { employeeMapper.mapFromDto(it) }
 
             val unseenRoutesDto = unseenRoutesDeferred.await()
-            val unseenRoutes = unseenRoutesDto.map { routeMapper.mapFromDto(it) }
+            val unseenRoutes = unseenRoutesDto.map { it.getRoute() }
 
             val isSuccess = employeesDto.isNotEmpty()
 
@@ -39,5 +41,17 @@ class PickEmployeeRepositoryImpl @Inject constructor(
                 isSuccess, data, errorMessage
             )
         }
+    }
+
+    private fun RouteDto.getRoute(): Route {
+        return Route(
+            routeId,
+            avgSpeed,
+            day,
+            distanceTravelled,
+            month,
+            emptyList(),
+            timeFinished, timeStarted, userId, year, seen
+        )
     }
 }

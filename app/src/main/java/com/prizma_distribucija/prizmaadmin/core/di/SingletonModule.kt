@@ -50,10 +50,9 @@ object SingletonModule {
     @Singleton
     fun providePickEmployeeRepository(
         firebaseService: FirebaseService,
-        routeMapper: RouteMapper,
         employeeMapper: EmployeeMapper
     ): PickEmployeeRepository =
-        PickEmployeeRepositoryImpl(firebaseService, routeMapper, employeeMapper)
+        PickEmployeeRepositoryImpl(firebaseService, employeeMapper)
 
     @Provides
     @Singleton
@@ -66,9 +65,8 @@ object SingletonModule {
         dispatcherProvider: DispatcherProvider,
         firebaseService: FirebaseService,
         employeeMapper: EmployeeMapper,
-        routeMapper: RouteMapper
     ): PickMonthRepository =
-        PickMonthRepositoryImpl(dispatcherProvider, firebaseService, employeeMapper, routeMapper)
+        PickMonthRepositoryImpl(dispatcherProvider, firebaseService, employeeMapper)
 
     @Provides
     @Singleton
@@ -85,9 +83,8 @@ object SingletonModule {
     fun providePickRouteRepository(
         dispatcherProvider: DispatcherProvider,
         firebaseService: FirebaseService,
-        routeMapper: RouteMapper
     ): PickRouteRepository =
-        PickRouteRepositoryImpl(dispatcherProvider, firebaseService, routeMapper)
+        PickRouteRepositoryImpl(dispatcherProvider, firebaseService)
 
     @Provides
     @Singleton

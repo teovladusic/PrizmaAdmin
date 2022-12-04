@@ -5,6 +5,7 @@ import com.google.firebase.firestore.GeoPoint
 import com.prizma_distribucija.prizmaadmin.core.domain.FirebaseService
 import com.prizma_distribucija.prizmaadmin.core.util.Constants
 import com.prizma_distribucija.prizmaadmin.feature_verify_route.data.remote.dto.EmployeeDto
+import com.prizma_distribucija.prizmaadmin.feature_verify_route.data.remote.dto.PathPointDto
 import com.prizma_distribucija.prizmaadmin.feature_verify_route.data.remote.dto.RouteDto
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -44,5 +45,11 @@ class FirebaseServiceImpl @Inject constructor(
     override suspend fun setRouteSeen(routeId: String) {
         firebaseFirestore.collection(Constants.ROUTES_COLLECTION).document(routeId)
             .update("seen", true)
+    }
+
+    override suspend fun getPathPointsFromIds(ids: List<String>): List<PathPointDto> {
+        return firebaseFirestore.collection(Constants.PATH_POINTS_COLLECTION)
+            .whereIn("id", ids)
+            .get().await().toObjects(PathPointDto::class.java)
     }
 }

@@ -6,7 +6,9 @@ object Constants {
 
     const val EMPLOYEES_COLLECTION = "users"
 
-    const val ROUTES_COLLECTION = "routes"
+    const val ROUTES_COLLECTION = "routes_2"
+
+    const val PATH_POINTS_COLLECTION = "path_points"
 
     val months = listOf(
         "Siječanj (1)",

@@ -1,14 +1,12 @@
 package com.prizma_distribucija.prizmaadmin.feature_verify_route.data.remote.dto
 
-import com.google.firebase.firestore.GeoPoint
-
 data class RouteDto(
     val routeId: String,
     val avgSpeed: String,
     val day: Int,
     val distanceTravelled: String,
     val month: Int,
-    val pathPoints: List<GeoPoint>,
+    val pathPointIds: List<String>,
     val timeFinished: String,
     val timeStarted: String,
     val userId: String,

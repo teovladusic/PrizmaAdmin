@@ -28,7 +28,9 @@ class PickEmployeeViewModel @Inject constructor(
     init {
         viewModelScope.launch(dispatchers.io) {
             getAllEmployeesWithUnseenRoutesUseCase().collectLatest {
+
                 _getEmployeesWithUnseenRoutesStatus.emit(it)
+
                 if (it::class.java == Resource.Success::class.java) {
                     _employeesWithUnseenRoutes.clear()
                     _employeesWithUnseenRoutes.addAll(it.data ?: emptyList())
